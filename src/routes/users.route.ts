@@ -11,4 +11,22 @@ router.get('/users', (req, res) =>{
     });
 })
 
+// update user
+router.put('/users/:id', (req, res) =>{
+    const { id } = req.params
+    const payload = req.body
+    User.findByIdAndUpdate(id, { $set: payload }).exec((err, data) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(data);
+    });
+})
+
+//add user
+router.post('/users', (req, res) =>{
+    const payload = req.body
+    const user = new User(payload)
+    user.save()
+    res.status(201).send(user);
+})
+
 export { router as userRouter }
