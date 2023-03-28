@@ -11,6 +11,15 @@ router.get('/users', (req, res) =>{
     });
 })
 
+//get user by id
+router.get('/users/:id', async (req, res) => {
+    const { id } = req.params
+    User.findById(id).exec((err, data) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(data);
+    });
+})
+
 // update user
 router.put('/users/:id', (req, res) =>{
     const { id } = req.params
