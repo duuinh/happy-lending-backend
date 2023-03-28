@@ -5,7 +5,13 @@ const router = express.Router()
 
 //get all items
 router.get('/items', async (req, res) => {
-    Item.find().exec((err, data) => {
+    Item.find().populate({ 
+        path: 'lender',
+        populate: {
+          path: 'location',
+          model: 'Location'
+        } 
+     }).exec((err, data) => {
         if (err) return res.status(400).send(err);
         res.status(200).send(data);
     });
@@ -14,7 +20,13 @@ router.get('/items', async (req, res) => {
 //get item by id
 router.get('/items/:id', async (req, res) => {
     const { id } = req.params
-    Item.findById(id).exec((err, data) => {
+    Item.findById(id).populate({ 
+        path: 'lender',
+        populate: {
+          path: 'location',
+          model: 'Location'
+        } 
+     }).exec((err, data) => {
         if (err) return res.status(400).send(err);
         res.status(200).send(data);
     });
