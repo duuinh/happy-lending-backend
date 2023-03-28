@@ -21,7 +21,8 @@ const schema: Schema = new Schema({
         required: true
     },
     location: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Location',
         required: true
     },
 }, { timestamps: true, versionKey: false })

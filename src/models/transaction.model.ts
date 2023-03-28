@@ -15,11 +15,13 @@ const schema: Schema = new Schema({
         required: true
     },  
     lender: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     borrower: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     pick_up_date: {
