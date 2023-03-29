@@ -1,4 +1,5 @@
 import express from 'express'
+import { ContractStatusEnum } from '../constants';
 import {Contract} from '../models/contract.model'
 import socket from "../socket";
 
@@ -30,11 +31,19 @@ router.get('/contracts/lender/:lender_id', async (req, res) => {
     });
 })
 
+//add contract
+router.post('/contracts', (req, res) =>{
+    const payload = req.body
+    const contract = new Contract(payload)
+    contract.save()
+    res.status(201).send(contract);
+})
+
 //request borrowing
 router.post('/contracts/request_borrowing', (req, res) =>{
     const payload = req.body
     const contract = new Contract(payload)
-    contract.status = 'request';
+    contract.status = ContractStatusEnum.created;
     contract.save()
     res.status(201).send(contract);
 })
@@ -42,7 +51,7 @@ router.post('/contracts/request_borrowing', (req, res) =>{
 //accept borrowing
 router.put('/contracts/accept_borrowing/:id', (req, res) =>{
     const { id } = req.params
-    const payload = {status: 'accepted'}
+    const payload = {status: ContractStatusEnum.accepted}
     Contract.findByIdAndUpdate(id, { $set: payload }).exec((err, data) => {
         if (err) return res.status(400).send(err);
         res.status(200).send(data);

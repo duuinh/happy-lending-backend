@@ -1,4 +1,5 @@
 import { model, Schema, Document } from "mongoose"
+import { ItemStatusEnum } from "../constants"
 
 export type ItemDocument = Document & {
     name: String,
@@ -23,7 +24,7 @@ const schema: Schema = new Schema({
     },
     status: {
         type: String,
-        required: true
+        default: ItemStatusEnum.available,
     }
 }, { timestamps: true, versionKey: false })
 

@@ -1,4 +1,5 @@
 import { model, Schema, Document } from "mongoose"
+import { ContractStatusEnum } from "../constants"
 
 export type ContractDocument = Document & {
     item: String,
@@ -11,7 +12,8 @@ export type ContractDocument = Document & {
 
 const schema: Schema = new Schema({ 
     item: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Item',
         required: true
     },  
     lender: {
@@ -34,7 +36,7 @@ const schema: Schema = new Schema({
     },
     status: {
         type: String,
-        required: true
+        default: ContractStatusEnum.created
     }
 }, { timestamps: true, versionKey: false })
 
