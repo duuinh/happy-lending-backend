@@ -38,4 +38,12 @@ router.post('/users', (req, res) =>{
     res.status(201).send(user);
 })
 
+//delete user
+router.delete('/users/:id', (req, res) =>{
+    const { id } = req.params
+    User.deleteOne({_id: id}).exec((err, data) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(data);
+    });
+})
 export { router as userRouter }

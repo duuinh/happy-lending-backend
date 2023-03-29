@@ -50,4 +50,12 @@ router.put('/items/:id', (req, res) =>{
     });
 })
 
+//delete item
+router.delete('/items/:id', (req, res) =>{
+    const { id } = req.params
+    Item.deleteOne({_id: id}).exec((err, data) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(data);
+    });
+})
 export { router as itemRouter }

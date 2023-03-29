@@ -28,7 +28,7 @@ router.post('/locations', (req, res) =>{
     res.status(201).send(location);
 })
 
-//update item
+//update location
 router.put('/locations/:id', (req, res) =>{
     const { id } = req.params
     const payload = req.body
@@ -38,4 +38,12 @@ router.put('/locations/:id', (req, res) =>{
     });
 })
 
+//delete location
+router.delete('/locations/:id', (req, res) =>{
+    const { id } = req.params
+    Location.deleteOne({_id: id}).exec((err, data) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).send(data);
+    });
+})
 export { router as locationRouter }
