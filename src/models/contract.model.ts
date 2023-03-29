@@ -1,6 +1,6 @@
 import { model, Schema, Document } from "mongoose"
 
-export type TransactionDocument = Document & {
+export type ContractDocument = Document & {
     item: String,
     lender: String,
     borrower: String,
@@ -38,4 +38,4 @@ const schema: Schema = new Schema({
     }
 }, { timestamps: true, versionKey: false })
 
-export const Transaction = model<TransactionDocument>('Transaction', schema)
+export const Contract = model<ContractDocument>('Contract', schema)

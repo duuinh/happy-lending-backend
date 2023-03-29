@@ -2,7 +2,7 @@ import express, { Application, Request, Response } from 'express'
 import dotenv from "dotenv"
 import { itemRouter } from './routes/items.route'
 import { locationRouter } from './routes/locations.route'
-import { transactionRouter } from './routes/transactions.routes'
+import { contractRouter } from './routes/contracts.routes'
 import { userRouter } from './routes/users.route'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
@@ -37,7 +37,7 @@ app.use(cors())
 // add routes
 app.use('/api', itemRouter)
 app.use('/api', locationRouter)
-app.use('/api', transactionRouter)
+app.use('/api', contractRouter)
 app.use('/api', userRouter)
 
 server.listen(PORT, () => {
