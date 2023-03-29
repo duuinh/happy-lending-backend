@@ -5,7 +5,7 @@ const router = express.Router()
 
 // get all users
 router.get('/users', (req, res) =>{
-    User.find().exec((err, data) => {
+    User.find().populate('location').exec((err, data) => {
         if (err) return res.status(400).send(err);
         res.status(200).send(data);
     });
@@ -14,7 +14,7 @@ router.get('/users', (req, res) =>{
 //get user by id
 router.get('/users/:id', async (req, res) => {
     const { id } = req.params
-    User.findById(id).exec((err, data) => {
+    User.findById(id).populate('location').exec((err, data) => {
         if (err) return res.status(400).send(err);
         res.status(200).send(data);
     });
