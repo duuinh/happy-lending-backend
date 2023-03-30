@@ -2,6 +2,7 @@
 node_modules
 
 src/views
+dist
 
 # local env files
 .env
