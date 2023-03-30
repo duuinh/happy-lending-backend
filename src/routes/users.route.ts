@@ -1,5 +1,6 @@
 import express from 'express'
-import User from '../models/user.model'
+import { getCombinedNodeFlags } from 'typescript';
+import User, { UserDocument } from '../models/user.model'
 
 const router = express.Router()
 
@@ -18,6 +19,20 @@ router.get('/users/:id', async (req, res) => {
         if (err) return res.status(400).send(err);
         res.status(200).send(data);
     });
+})
+
+//easy login
+router.post('/users/login', async (req, res) => {
+    const payload = req.body
+    try {
+        const user : UserDocument|null = await User.findOne({email: payload.email}).exec();
+        if (!user || user.phone_no !== payload.phone_no) {
+            return res.status(401).json('wrong email or phone no.');
+        }
+        res.status(200).send(user);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 })
 
 // update user
