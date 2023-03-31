@@ -1,6 +1,6 @@
 import express from 'express'
 import { ContractStatusEnum } from '../constants';
-import { Contract } from '../models/contract.model'
+import { Contract, ContractDocument } from '../models/contract.model'
 import socket from "../socket";
 
 const router = express.Router()
@@ -8,10 +8,8 @@ const router = express.Router()
 //get all contract
 router.get('/contracts', async (req, res) => {
     try {
-        Contract.find().exec((err, data) => {
-            if (err) return res.status(400).send(err);
-            res.status(200).send(data);
-        });
+        const allContracts: ContractDocument[] | null = await Contract.find().exec();
+        res.status(200).send(allContracts);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -22,10 +20,8 @@ router.get('/contracts', async (req, res) => {
 router.get('/contracts/borrower/:borrower_id', async (req, res) => {
     try {
         const { borrower_id } = req.params
-        Contract.find({ borrower: borrower_id }).exec((err, data) => {
-            if (err) return res.status(400).send(err);
-            res.status(200).send(data);
-        });
+        const contractByBorrowerId: ContractDocument[] | null = await Contract.find({ borrower: borrower_id }).exec();
+        res.status(200).send(contractByBorrowerId);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -35,10 +31,8 @@ router.get('/contracts/borrower/:borrower_id', async (req, res) => {
 router.get('/contracts/lender/:lender_id', async (req, res) => {
     try {
         const { lender_id } = req.params
-        Contract.find({ lender: lender_id }).exec((err, data) => {
-            if (err) return res.status(400).send(err);
-            res.status(200).send(data);
-        });
+        const contractByLenderId: ContractDocument[] | null = await Contract.find({ lender: lender_id }).exec();
+        res.status(200).send(contractByLenderId);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -65,21 +59,18 @@ router.post('/contracts/request_borrowing', (req, res) => {
         contract.status = ContractStatusEnum.created;
         contract.save()
         res.status(201).send(contract);
-
     } catch (err) {
         res.status(400).send(err);
     }
 })
 
 //accept borrowing
-router.put('/contracts/accept_borrowing/:id', (req, res) => {
+router.put('/contracts/accept_borrowing/:id', async (req, res) => {
     try {
         const { id } = req.params
         const payload = { status: ContractStatusEnum.accepted }
-        Contract.findByIdAndUpdate(id, { $set: payload }).exec((err, data) => {
-            if (err) return res.status(400).send(err);
-            res.status(200).send(data);
-        });
+        const borrowAcceptedContract: ContractDocument | null = await Contract.findByIdAndUpdate(id, { $set: payload }).exec();
+        res.status(200).send(borrowAcceptedContract);
     } catch (err) {
         res.status(400).send(err);
     }
