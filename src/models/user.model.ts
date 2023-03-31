@@ -1,10 +1,10 @@
 import { model, Schema, Document } from "mongoose"
 
 export type UserDocument = Document & {
-    name: String,
-    email: String,
-    phone_no: String,
-    location: String,
+    name: string,
+    email: string,
+    phone_no: string,
+    location: string,
 }
 
 const schema: Schema = new Schema({ 

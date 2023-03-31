@@ -2,10 +2,10 @@ import { model, Schema, Document } from "mongoose"
 import { ItemStatusEnum } from "../constants"
 
 export type ItemDocument = Document & {
-    name: String,
-    img_url: String,
-    lender: String,
-    status: String
+    name: string,
+    img_url: string,
+    lender: string,
+    status: string
 }
 
 const schema: Schema = new Schema({ 

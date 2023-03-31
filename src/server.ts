@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from 'express'
+import express, { Application } from 'express'
 import dotenv from "dotenv"
 import { itemRouter } from './routes/items.route'
 import { locationRouter } from './routes/locations.route'
@@ -6,13 +6,12 @@ import { contractRouter } from './routes/contracts.routes'
 import { userRouter } from './routes/users.route'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-import socket from "./socket"
+import cors from 'cors'
+import http from "http"
 
 const app: Application = express()
 const PORT = process.env.SERVER_PORT || 8000
-const http = require("http")
 const server = http.createServer(app);
-const cors = require('cors')
 
 // initialize configuration
 dotenv.config();
@@ -44,4 +43,3 @@ server.listen(PORT, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
   });
 
-socket.connect(server)

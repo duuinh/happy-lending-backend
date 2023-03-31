@@ -1,7 +1,6 @@
 import express from 'express'
 import { ContractStatusEnum } from '../constants';
 import { Contract, ContractDocument } from '../models/contract.model'
-import socket from "../socket";
 
 const router = express.Router()
 
