@@ -25,11 +25,11 @@ router.get('/locations/:id', async (req, res) => {
 })
 
 //add location
-router.post('/locations', (req, res) => {
+router.post('/locations', async (req, res) => {
     try {
         const payload = req.body
         const location = new Location(payload)
-        location.save()
+        await location.save()
         res.status(201).send(location);
     } catch (err) {
         res.status(400).send(err);

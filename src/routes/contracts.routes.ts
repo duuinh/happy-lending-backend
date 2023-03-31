@@ -39,11 +39,11 @@ router.get('/contracts/lender/:lender_id', async (req, res) => {
 })
 
 //add contract
-router.post('/contracts', (req, res) => {
+router.post('/contracts', async (req, res) => {
     try {
         const payload = req.body
         const contract = new Contract(payload)
-        contract.save()
+        await contract.save()
         res.status(201).send(contract);
     } catch (err) {
         res.status(400).send(err);
@@ -52,12 +52,12 @@ router.post('/contracts', (req, res) => {
 })
 
 //request borrowing
-router.post('/contracts/request_borrowing', (req, res) => {
+router.post('/contracts/request_borrowing', async (req, res) => {
     try {
         const payload = req.body
         const contract = new Contract(payload)
         contract.status = ContractStatusEnum.created;
-        contract.save()
+        await contract.save()
         res.status(201).send(contract);
     } catch (err) {
         res.status(400).send(err);

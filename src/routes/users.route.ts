@@ -51,11 +51,11 @@ router.put('/users/:id', async (req, res) => {
 })
 
 //add user
-router.post('/users', (req, res) => {
+router.post('/users', async (req, res) => {
     try {
         const payload = req.body
         const user = new User(payload)
-        user.save()
+        await user.save()
         res.status(201).send(user);
     } catch (err) {
         res.status(400).send(err);
