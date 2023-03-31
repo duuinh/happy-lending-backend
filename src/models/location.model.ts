@@ -1,13 +1,14 @@
 import { model, Schema, Document } from "mongoose"
 
 export type LocationDocument = Document & {
-    name: String
+    name: string
 }
 
 const schema: Schema = new Schema({ 
     name: {
         type: String,
-        required: true
+        required: true,
+        unique : true
     }, 
 }, { timestamps: true, versionKey: false })
 

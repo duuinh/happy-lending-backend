@@ -14,7 +14,8 @@ const schema: Schema = new Schema({
     }, 
     email: {
         type: String,
-        required: true
+        required: true,
+        unique : true
     },
     phone_no: {
         type: String,
