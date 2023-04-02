@@ -9,12 +9,12 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import http from "http"
 
+// initialize configuration
+dotenv.config();
+
 const app: Application = express()
 const PORT = process.env.SERVER_PORT || 8080
 const server = http.createServer(app);
-
-// initialize configuration
-dotenv.config();
 
 mongoose.connect(`${process.env.MONGODB_SRV}`, {
     useCreateIndex: true,
