@@ -10,7 +10,7 @@ import cors from 'cors'
 import http from "http"
 
 const app: Application = express()
-const PORT = process.env.SERVER_PORT || 8000
+const PORT = process.env.SERVER_PORT || 8080
 const server = http.createServer(app);
 
 // initialize configuration
