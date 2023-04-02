@@ -1,10 +1,10 @@
 import { model, Schema, Document } from "mongoose"
 
 export type UserDocument = Document & {
-    name: String,
-    email: String,
-    phone_no: String,
-    location: String,
+    name: string,
+    email: string,
+    phone_no: string,
+    location: string,
 }
 
 const schema: Schema = new Schema({ 
@@ -14,7 +14,8 @@ const schema: Schema = new Schema({
     }, 
     email: {
         type: String,
-        required: true
+        required: true,
+        unique : true
     },
     phone_no: {
         type: String,

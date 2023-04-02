@@ -2,12 +2,12 @@ import { model, Schema, Document } from "mongoose"
 import { ContractStatusEnum } from "../constants"
 
 export type ContractDocument = Document & {
-    item: String,
-    lender: String,
-    borrower: String,
+    item: string,
+    lender: string,
+    borrower: string,
     pick_up_date: Date,
     return_date: Date,
-    status: String
+    status: string
 }
 
 const schema: Schema = new Schema({ 
