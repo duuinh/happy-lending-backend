@@ -50,19 +50,6 @@ router.post('/contracts', async (req, res) => {
 
 })
 
-//request borrowing
-router.post('/contracts/request_borrowing', async (req, res) => {
-    try {
-        const payload = req.body
-        const contract = new Contract(payload)
-        contract.status = ContractStatusEnum.created;
-        await contract.save()
-        res.status(201).send(contract);
-    } catch (err) {
-        res.status(400).send(err);
-    }
-})
-
 //accept borrowing
 router.put('/contracts/accept_borrowing/:id', async (req, res) => {
     try {
