@@ -19,6 +19,17 @@ router.get('/items', async (req, res) => {
     }
 })
 
+//get all items by lender id
+router.get('/items/lender/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const allItems: ItemDocument[] | null = await Item.find({ lender: id}).exec();
+        res.status(200).send(allItems);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
+
 //get item by id
 router.get('/items/:id', async (req, res) => {
     try {
