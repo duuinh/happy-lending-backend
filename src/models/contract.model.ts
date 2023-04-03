@@ -36,7 +36,7 @@ const schema: Schema = new Schema({
     },
     status: {
         type: String,
-        default: ContractStatusEnum.created
+        default: ContractStatusEnum.requested
     }
 }, { timestamps: true, versionKey: false })
 

@@ -5,7 +5,7 @@ export enum ItemStatusEnum {
 }
 
 export enum ContractStatusEnum {
-    created = 'created',
+    requested = 'requested',
     accepted = 'accepted',
     rejected = 'rejected',
     closed = 'closed',
