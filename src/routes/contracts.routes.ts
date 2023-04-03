@@ -50,13 +50,13 @@ router.post('/contracts', async (req, res) => {
 
 })
 
-//accept borrowing
-router.put('/contracts/accept_borrowing/:id', async (req, res) => {
+// update contract
+router.put('/contracts/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const payload = { status: ContractStatusEnum.accepted }
-        const borrowAcceptedContract: ContractDocument | null = await Contract.findByIdAndUpdate(id, { $set: payload }).exec();
-        res.status(200).send(borrowAcceptedContract);
+        const payload = req.body
+        const contract: ContractDocument | null = await Contract.findByIdAndUpdate(id, { $set: payload }).exec();
+        res.status(200).send(contract);
     } catch (err) {
         res.status(400).send(err);
     }
