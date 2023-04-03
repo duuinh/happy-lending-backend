@@ -14,7 +14,7 @@ import http from "http"
 dotenv.config();
 
 const app: Application = express()
-const PORT = process.env.SERVER_PORT || 8000
+const PORT = process.env.SERVER_PORT || 8080
 const server = http.createServer(app);
 
 mongoose.connect(`${process.env.MONGODB_SRV}`, {
