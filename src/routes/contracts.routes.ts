@@ -19,7 +19,7 @@ router.get('/contracts', async (req, res) => {
 router.get('/contracts/borrower/:borrower_id', async (req, res) => {
     try {
         const { borrower_id } = req.params
-        const contractByBorrowerId: ContractDocument[] | null = await Contract.find({ borrower: borrower_id }).exec();
+        const contractByBorrowerId: ContractDocument[] | null = await Contract.find({ borrower: borrower_id }).populate(['item','lender']).exec();
         res.status(200).send(contractByBorrowerId);
     } catch (err) {
         res.status(400).send(err);
@@ -30,7 +30,7 @@ router.get('/contracts/borrower/:borrower_id', async (req, res) => {
 router.get('/contracts/lender/:lender_id', async (req, res) => {
     try {
         const { lender_id } = req.params
-        const contractByLenderId: ContractDocument[] | null = await Contract.find({ lender: lender_id }).exec();
+        const contractByLenderId: ContractDocument[] | null = await Contract.find({ lender: lender_id }).populate(['item','borrower']).exec();
         res.status(200).send(contractByLenderId);
     } catch (err) {
         res.status(400).send(err);
