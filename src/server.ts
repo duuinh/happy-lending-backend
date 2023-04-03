@@ -4,6 +4,7 @@ import { itemRouter } from './routes/items.route'
 import { locationRouter } from './routes/locations.route'
 import { contractRouter } from './routes/contracts.routes'
 import { userRouter } from './routes/users.route'
+import { fileUploadRouter } from './routes/upload.route'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import cors from 'cors'
@@ -13,7 +14,7 @@ import http from "http"
 dotenv.config();
 
 const app: Application = express()
-const PORT = process.env.SERVER_PORT || 8080
+const PORT = process.env.SERVER_PORT || 8000
 const server = http.createServer(app);
 
 mongoose.connect(`${process.env.MONGODB_SRV}`, {
@@ -38,6 +39,7 @@ app.use('/api', itemRouter)
 app.use('/api', locationRouter)
 app.use('/api', contractRouter)
 app.use('/api', userRouter)
+app.use('/api', fileUploadRouter) 
 
 server.listen(PORT, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
