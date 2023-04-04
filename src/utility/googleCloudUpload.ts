@@ -36,11 +36,8 @@ class FileController {
         return res.status(400).send({ message: "Please upload a file!" });
       }
 
-      //let uniqueImageId = crypto.randomUUID(); //to create a unique id
       const fileExtension = path.extname(req.file.originalname);
-      console.log('fileExtension = '+fileExtension)
       req.file.originalname = 'items/'+crypto.randomUUID()+fileExtension;
-      console.log('req.file.originalname = '+req.file.originalname)
       const blob = bucket.file(req.file.originalname);
       const blobStream = blob.createWriteStream({
         resumable: false,
@@ -54,17 +51,6 @@ class FileController {
         const publicUrl = format(
           `https://storage.googleapis.com/${bucket.name}/${blob.name}`
         );
-
-        // try {
-        //   await bucket.file(req.file!.originalname).makePublic();
-        // } catch {
-        //   return res.status(500).send({
-        //     message: `Uploaded the file successfully: ${
-        //       req.file!.originalname
-        //     }, but public access is denied!`,
-        //     url: publicUrl,
-        //   });
-        // }
 
         res.status(200).send({
           message: "Uploaded the file successfully: " + req.file!.originalname,
