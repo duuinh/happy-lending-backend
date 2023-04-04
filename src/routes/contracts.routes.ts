@@ -1,5 +1,4 @@
 import express from 'express'
-import { ContractStatusEnum } from '../constants';
 import { Contract, ContractDocument } from '../models/contract.model'
 
 const router = express.Router()
@@ -30,7 +29,7 @@ router.get('/contracts/borrower/:borrower_id', async (req, res) => {
 router.get('/contracts/lender/:lender_id', async (req, res) => {
     try {
         const { lender_id } = req.params
-        const contractByLenderId: ContractDocument[] | null = await Contract.find({ lender: lender_id }).populate(['item','borrower']).exec();
+        const contractByLenderId: ContractDocument[] | null = await Contract.find({ lender: lender_id }).populate(['item','borrower', 'lender']).exec();
         res.status(200).send(contractByLenderId);
     } catch (err) {
         res.status(400).send(err);
