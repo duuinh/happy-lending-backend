@@ -38,17 +38,17 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
-// update user
-router.put('/users/:id', async (req, res) => {
-    try {
-        const { id } = req.params
-        const payload = req.body
-        const updatedUser: UserDocument | null = await User.findByIdAndUpdate(id, { $set: payload }).exec();
-        res.status(200).send(updatedUser);
-    } catch (err) {
-        res.status(400).send(err);
-    }
-})
+// // update user
+// router.put('/users/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         const payload = req.body
+//         const updatedUser: UserDocument | null = await User.findByIdAndUpdate(id, { $set: payload }).exec();
+//         res.status(200).send(updatedUser);
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
 
 //add user
 router.post('/users', async (req, res) => {
