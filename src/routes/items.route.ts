@@ -59,26 +59,26 @@ router.post('/items', (req, res) => {
     }
 })
 
-//update item
-router.put('/items/:id', async (req, res) => {
-    try {
-        const { id } = req.params
-        const payload = req.body
-        const updatedItem: ItemDocument | null = await Item.findByIdAndUpdate(id, { $set: payload }).exec();
-        res.status(200).send(updatedItem);
-    } catch (err) {
-        res.status(400).send(err);
-    }
-})
+// //update item
+// router.put('/items/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         const payload = req.body
+//         const updatedItem: ItemDocument | null = await Item.findByIdAndUpdate(id, { $set: payload }).exec();
+//         res.status(200).send(updatedItem);
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
 
-//delete item
-router.delete('/items/:id', async (req, res) => {
-    try {
-        const { id } = req.params
-        await  Item.deleteOne({ _id: id }).exec();
-        res.status(200).send('Item deletion succeeded');
-    } catch (err) {
-        res.status(400).send(err);
-    }
-})
+// //delete item
+// router.delete('/items/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         await  Item.deleteOne({ _id: id }).exec();
+//         res.status(200).send('Item deletion succeeded');
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
 export { router as itemRouter }
