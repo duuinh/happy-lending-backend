@@ -36,26 +36,26 @@ router.post('/locations', async (req, res) => {
     }
 })
 
-//update location
-router.put('/locations/:id', async (req, res) => {
-    try {
-        const { id } = req.params
-        const payload = req.body
-        const updatedLocation: LocationDocument | null = await Location.findByIdAndUpdate(id, { $set: payload }).exec();
-        res.status(200).send(updatedLocation);
-    } catch (err) {
-        res.status(400).send(err);
-    }
-})
+// //update location
+// router.put('/locations/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         const payload = req.body
+//         const updatedLocation: LocationDocument | null = await Location.findByIdAndUpdate(id, { $set: payload }).exec();
+//         res.status(200).send(updatedLocation);
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
 
-//delete location
-router.delete('/locations/:id', async (req, res) => {
-    try {
-        const { id } = req.params
-        await Location.deleteOne({ _id: id }).exec();
-        res.status(200).send('Location deletion succeeded');
-    } catch (err) {
-        res.status(400).send(err);
-    }
-})
+// //delete location
+// router.delete('/locations/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         await Location.deleteOne({ _id: id }).exec();
+//         res.status(200).send('Location deletion succeeded');
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
 export { router as locationRouter }
