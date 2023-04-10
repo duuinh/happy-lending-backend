@@ -62,14 +62,14 @@ router.post('/users', async (req, res) => {
     }
 })
 
-//delete user
-router.delete('/users/:id', async (req, res) => {
-    try {
-        const { id } = req.params
-        await User.deleteOne({ _id: id }).exec();
-        res.status(200).send('User deletion succeeded');
-    } catch (err) {
-        res.status(400).send(err);
-    }
-})
+// //delete user
+// router.delete('/users/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         await User.deleteOne({ _id: id }).exec();
+//         res.status(200).send('User deletion succeeded');
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
 export { router as userRouter }
