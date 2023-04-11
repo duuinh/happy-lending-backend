@@ -50,11 +50,11 @@ router.get('/items/:id', async (req, res) => {
 })
 
 //add item
-router.post('/items', (req, res) => {
+router.post('/items', async (req, res) => {
     try {
         const payload = req.body
         const item = new Item(payload)
-        item.save()
+        await item.save()
         res.status(201).send(item);
     } catch (err) {
         res.status(400).send(err);
