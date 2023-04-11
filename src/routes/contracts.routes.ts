@@ -3,16 +3,16 @@ import { Contract, ContractDocument } from '../models/contract.model'
 
 const router = express.Router()
 
-//get all contract
-router.get('/contracts', async (req, res) => {
-    try {
-        const allContracts: ContractDocument[] | null = await Contract.find().exec();
-        res.status(200).send(allContracts);
-    } catch (err) {
-        res.status(400).send(err);
-    }
+// //get all contract
+// router.get('/contracts', async (req, res) => {
+//     try {
+//         const allContracts: ContractDocument[] | null = await Contract.find().exec();
+//         res.status(200).send(allContracts);
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
 
-})
+// })
 
 //get contract by borrower id
 router.get('/contracts/borrower/:borrower_id', async (req, res) => {

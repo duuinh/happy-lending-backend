@@ -3,15 +3,15 @@ import User, {UserDocument } from '../models/user.model'
 
 const router = express.Router()
 
-// get all users
-router.get('/users', async (req, res) => {
-    try {
-        const allUsers: UserDocument[] | null = await User.find().populate('location').exec();
-        res.status(200).send(allUsers);
-    } catch (err) {
-        res.status(400).send(err);
-    }
-})
+// // get all users
+// router.get('/users', async (req, res) => {
+//     try {
+//         const allUsers: UserDocument[] | null = await User.find().populate('location').exec();
+//         res.status(200).send(allUsers);
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
 
 //get user by id
 router.get('/users/:id', async (req, res) => {
