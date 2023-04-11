@@ -8,6 +8,7 @@ router.get('/items', async (req, res) => {
     try {
         const allItems: ItemDocument[] | null = await Item.find().populate({
             path: 'lender',
+            select: 'location',
             populate: {
                 path: 'location',
                 model: 'Location'
@@ -36,6 +37,7 @@ router.get('/items/:id', async (req, res) => {
         const { id } = req.params
         const item: ItemDocument | null = await Item.findById(id).populate({
             path: 'lender',
+            select: ['name','location'],
             populate: {
                 path: 'location',
                 model: 'Location'
