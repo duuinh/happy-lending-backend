@@ -1,5 +1,5 @@
 import express from 'express'
-import { Location, LocationDocument } from '../models/location.model'
+import Location, { LocationDocument } from '../models/location.model'
 
 const router = express.Router()
 

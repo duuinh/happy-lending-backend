@@ -1,5 +1,6 @@
 import { model, Schema, Document } from "mongoose"
 import { ItemStatusEnum } from "../constants"
+import User from "./user.model"
 
 export type ItemDocument = Document & {
     name: string,
@@ -28,4 +29,10 @@ const schema: Schema = new Schema({
     }
 }, { timestamps: true, versionKey: false })
 
-export const Item = model<ItemDocument>('Item', schema)
+schema.path('lender').validate(async (value: string) => {
+    return await User.findById(value);
+  }, 'User does not exist');
+
+const Item = model<ItemDocument>('Item', schema)
+
+export default Item

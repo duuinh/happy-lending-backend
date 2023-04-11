@@ -1,4 +1,5 @@
 import { model, Schema, Document } from "mongoose"
+import Location from "./location.model";
 
 export type UserDocument = Document & {
     name: string,
@@ -28,5 +29,10 @@ const schema: Schema = new Schema({
     },
 }, { timestamps: true, versionKey: false })
 
+schema.path('location').validate(async (value: string) => {
+    return await Location.findById(value);
+}, 'Location does not exist');
+
 const User = model<UserDocument>('User', schema)
+
 export default User
