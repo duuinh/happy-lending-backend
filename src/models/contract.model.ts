@@ -1,5 +1,7 @@
 import { model, Schema, Document } from "mongoose"
 import { ContractStatusEnum } from "../constants"
+import Item from "./item.model"
+import User from "./user.model"
 
 export type ContractDocument = Document & {
     item: string,
@@ -40,4 +42,18 @@ const schema: Schema = new Schema({
     }
 }, { timestamps: true, versionKey: false })
 
-export const Contract = model<ContractDocument>('Contract', schema)
+schema.path('lender').validate(async (value: string) => {
+    return await User.findById(value);
+}, 'User does not exist');
+
+schema.path('borrower').validate(async (value: string) => {
+    return await User.findById(value);
+}, 'User does not exist');
+
+schema.path('item').validate(async (value: string) => {
+    return await Item.findById(value);
+}, 'Item does not exist');
+
+const Contract = model<ContractDocument>('Contract', schema)
+
+export default Contract

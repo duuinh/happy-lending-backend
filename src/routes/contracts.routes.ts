@@ -1,5 +1,5 @@
 import express from 'express'
-import { Contract, ContractDocument } from '../models/contract.model'
+import Contract, { ContractDocument } from '../models/contract.model'
 
 const router = express.Router()
 

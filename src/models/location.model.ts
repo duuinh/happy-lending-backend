@@ -12,4 +12,6 @@ const schema: Schema = new Schema({
     }, 
 }, { timestamps: true, versionKey: false })
 
-export const Location = model<LocationDocument>('Location', schema)
+const Location = model<LocationDocument>('Location', schema)
+
+export default Location
