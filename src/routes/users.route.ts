@@ -24,13 +24,13 @@ router.get('/users/:id', async (req, res) => {
     }
 })
 
-//easy login
-router.post('/users/login', async (req, res) => {
+//get user by email
+router.get('/users/find/:email', async (req, res) => {
     try {
-        const payload = req.body
-        const user: UserDocument | null = await User.findOne({ email: payload.email }).exec();
-        if (!user || user.phone_no !== payload.phone_no) {
-            return res.status(401).json('wrong email or phone no.');
+        const { email } = req.params
+        const user: UserDocument | null = await User.findOne({ email: email }).populate('location').exec();
+        if (!user) {
+            return res.status(404).json('User Not Found')
         }
         res.status(200).send(user);
     } catch (err) {
