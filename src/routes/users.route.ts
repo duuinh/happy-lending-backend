@@ -28,7 +28,7 @@ router.get('/users/:id', async (req, res) => {
 router.get('/users/find/:email', async (req, res) => {
     try {
         const { email } = req.params
-        const user: UserDocument | null = await User.findOne({ email: email }).populate('location').exec();
+        const user: UserDocument | null = await User.findOne({ email: email.toLowerCase() }).populate('location').exec();
         if (!user) {
             return res.status(404).json('User Not Found')
         }
@@ -54,7 +54,7 @@ router.put('/users/:id', async (req, res) => {
 router.post('/users', async (req, res) => {
     try {
         const payload = req.body
-        const user = new User(payload)
+        const user = new User({...payload, email: payload.email.toLowerCase()})
         await user.save()
         res.status(201).send(user);
     } catch (err) {
