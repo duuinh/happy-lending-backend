@@ -1,6 +1,7 @@
 import express, { Application } from 'express'
 import dotenv from "dotenv"
 import { itemRouter } from './routes/items.route'
+import { requestedItemRouter } from './routes/requestedItems.route'
 import { locationRouter } from './routes/locations.route'
 import { contractRouter } from './routes/contracts.routes'
 import { userRouter } from './routes/users.route'
@@ -36,6 +37,7 @@ app.use(cors())
 
 // add routes
 app.use('/api', itemRouter)
+app.use('/api', requestedItemRouter)
 app.use('/api', locationRouter)
 app.use('/api', contractRouter)
 app.use('/api', userRouter)

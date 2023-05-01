@@ -10,3 +10,8 @@ export enum ContractStatusEnum {
     rejected = 'rejected',
     closed = 'closed',
 }
+
+export enum RequestedItemStatusEnum {
+    open = 'open',
+    closed = 'closed',
+}
