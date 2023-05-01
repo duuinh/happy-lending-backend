@@ -25,7 +25,7 @@ router.get('/requested_items', async (req, res) => {
 router.get('/requested_items/borrower/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const allItems: RequestedItemDocument[] | null = await RequestedItem.find({ borrower: id}).exec();
+        const allItems: RequestedItemDocument[] | null = await RequestedItem.find({ borrower: id, status: { $ne: RequestedItemStatusEnum.closed }}).exec();
         res.status(200).send(allItems);
     } catch (err) {
         res.status(400).send(err);
