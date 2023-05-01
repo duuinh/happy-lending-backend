@@ -9,7 +9,7 @@ router.get('/requested_items', async (req, res) => {
     try {
         const allItems: RequestedItemDocument[] | null = await RequestedItem.find({ status: { $ne: RequestedItemStatusEnum.closed }}).populate({
             path: 'borrower',
-            select: 'location',
+            select: ['name', 'location'],
             populate: {
                 path: 'location',
                 model: 'Location'
