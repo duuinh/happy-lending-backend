@@ -1,13 +1,13 @@
 import express from 'express'
 import { RequestedItemStatusEnum } from '../constants';
-import RequestedItem, { RequestedItemDocument } from '../models/requested_item.model'
+import RequestedItem, { RequestedItemDocument } from '../models/requestedItem.model'
 
 const router = express.Router()
 
 //get all items
 router.get('/requested_items', async (req, res) => {
     try {
-        const allItems: RequestedItemDocument[] | null = await RequestedItem.find({ status: { $ne: RequestedItemStatusEnum.unlisted }}).populate({
+        const allItems: RequestedItemDocument[] | null = await RequestedItem.find({ status: { $ne: RequestedItemStatusEnum.closed }}).populate({
             path: 'borrower',
             select: 'location',
             populate: {
@@ -21,7 +21,7 @@ router.get('/requested_items', async (req, res) => {
     }
 })
 
-//get all items by lender id
+//get all items by borrower id
 router.get('/requested_items/borrower/:id', async (req, res) => {
     try {
         const { id } = req.params

@@ -1,20 +1,14 @@
 import { model, Schema, Document } from "mongoose"
 import { RequestedItemStatusEnum } from '../constants';
-// import { ItemStatusEnum } from "../constants"
 import User from "./user.model"
 
 export type RequestedItemDocument = Document & {
-    item_id: string,
     name: string,
     borrower: string,
     status: string
 }
 
 const schema: Schema = new Schema({ 
-    item_id: {
-        type: String,
-        required: true
-    }, 
     name: {
         type: String,
         required: true
@@ -26,9 +20,12 @@ const schema: Schema = new Schema({
     },
     status: {
         type: String,
-        default: RequestedItemStatusEnum.available,
+        default: RequestedItemStatusEnum.open,
+    },
+    offers: {
+        type: Array
     }
-}, { timestamps: true, versionKey: false })
+}, { timestamps: true, versionKey: false , collection: 'requested_items' })
 
 schema.path('borrower').validate(async (value: string) => {
     return await User.findById(value);

@@ -1,7 +1,7 @@
 import express, { Application } from 'express'
 import dotenv from "dotenv"
 import { itemRouter } from './routes/items.route'
-import { requestedItemRouter } from './routes/requested_items.route'
+import { requestedItemRouter } from './routes/requestedItems.route'
 import { locationRouter } from './routes/locations.route'
 import { contractRouter } from './routes/contracts.routes'
 import { userRouter } from './routes/users.route'
